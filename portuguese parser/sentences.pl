@@ -59,7 +59,7 @@ n(min, plur, fem) -->
 
 n(max, plur, fem)  -->
     ['Meninas'];['Vidas'];['Florestas'];['Maes'];
- 	['Cidades'];['Noticias'];['Portas'];['Lagrimas'].
+    ['Cidades'];['Noticias'];['Portas'];['Lagrimas'].
     
 n(min, sing, masc) --> 
     [menino];[tempo];[cacador];[lobo];
