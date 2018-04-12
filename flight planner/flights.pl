@@ -15,7 +15,6 @@ question3(S, C1, C2, C3, Day1, List) :-
     member(Y, [C1,C2,C3]), Y \= S, Y \== X,
     member(Z, [C1,C2,C3]), Z \= S, Z \= X, Z \= Y,
     question3_(S, X, Y, Z, Day1, List), !.
-
     
 question3_(S, C1, C2, C3, Day1, List) :-
 	route(S, C1, Day1, Route1),
