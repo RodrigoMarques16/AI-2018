@@ -9,10 +9,40 @@ question1(Place1, Place2, List) :-
 question2(Place1, Place2, Day, List) :-
     findall(Flight_num:Dep_time, flight(Place1, Place2, Day, Flight_num, Dep_time, _:_), List).
 
-%question3(S, C1, C2, C3, Begin, End, List).
+% What order should C1, C2 and C3 be visited, starting and ending at S, with at most 1 flight a day
+question3(S, C1, C2, C3, Day1, List) :-
+    member(X, [C1,C2,C3]), X \= S,
+    member(Y, [C1,C2,C3]), Y \= S, Y \== X,
+    member(Z, [C1,C2,C3]), Z \= S, Z \= X, Z \= Y,
+	question3_(S, X, Y, Z, Day1, List), !.
+
+    
+question3_(S, C1, C2, C3, Day1, List) :-
+	route(S, C1, Day1, Route1),
+    length(Route1, 1),
+    nextDay(Day1, Day2),
+    route(C1, C2, Day2, Route2),
+    length(Route2, 1),
+    nextDay(Day2, Day3),
+    route(C2, C3, Day3, Route3),
+    length(Route3, 1),
+    nextDay(Day3, Day4),
+    route(C3, S, Day4, Route4),
+    length(Route4, 1),
+    Temp = [Route1, Route2, Route3, Route4],
+    append(Temp, List).
 
 % Retrieves the DepartureTime from a Route
 depTime(_-_:_:DepartureTime, DepartureTime).
+
+% Avances day
+nextDay(mo, Day) :- Day=tu; Day=we; Day=th; Day=fr; Day=sa; Day=su.
+nextDay(tu, Day) :- Day=mo; Day=we; Day=th; Day=fr; Day=sa; Day=su.
+nextDay(we, Day) :- Day=mo; Day=tu; Day=th; Day=fr; Day=sa; Day=su.
+nextDay(th, Day) :- Day=mo; Day=tu; Day=we; Day=fr; Day=sa; Day=su.
+nextDay(fr, Day) :- Day=mo; Day=tu; Day=we; Day=th; Day=sa; Day=su.
+nextDay(sa, Day) :- Day=mo; Day=tu; Day=we; Day=th; Day=fr; Day=su.
+nextDay(su, Day) :- Day=mo; Day=tu; Day=we; Day=th; Day=fr; Day=sa.
 
 % Is true if there are at least 40 minutes between Time1 and Time2
 transfer(-1, _).
@@ -38,53 +68,17 @@ route_r(Place1, Place2, Day, Arrival, [Place1-Place2:Flight_num:Dep_time]) :-
     transfer(Arrival, Dep_time).
 
 % Intermediary flight
-route_r(Place1, Place2, Day, Arrival, FullRoute) :-
+route_r(Place1, Place2, Day, Arrival, Route) :-
     flight(Place1, Intermed, Day, Flight_num, Dep_time, Arr_time),
     transfer(Arrival, Dep_time),
-    print(Arrival),print("|"), print(Dep_time),print("|"), print(Arr_time), nl,
-    route_r(Intermed, Place2, Day, Arr_time, NewFullRoute),
-    append([Place1-Intermed:Flight_num:Dep_time], NewFullRoute, FullRoute).
-
-/*route_r(Place1, Place2, Day, Route, InRoute) :- 
-    flight(Place1, Intermed, Day, Flight_num, Dep_time, _Arr_time),
-    print(depTime(Route)),
-	\+ member(Intermed, InRoute),
-	append(InRoute, Place2, NewPlaces),								  
-	route_r(Intermed, Place2, Day, NewRoute, NewPlaces),
-	append([Place1-Intermed:Flight_num:Dep_time], NewRoute, Route).
-*/
-
-/*
-route(Place1,Place2,Day,Route) :- 
-    flight(Place1, Place2, Day, Flight_num, Dep_time,_),
-    Route = [Place1-Place2:Flight_num:Dep_time],
-    !.
-
-route(Place1,Place2,Day,Route) :- 
-    flight(Place1, Intermed, Day, Flight_num, Dep_time,_),
-    route(Intermed, Place2, Day, Route),
-	Route = [Intermed-Place2:Flight_num:Dep_time].
-*/
-/* * * * * * * * * * * * * * * * * * * * 
- * * * UTILITIES * * * * * * * * * * * *
- * * * * * * * * * * * * * * * * * * * */
-
-head([H|_], H). 
+    route_r(Intermed, Place2, Day, Arr_time, NewRoute),
+    append([Place1-Intermed:Flight_num:Dep_time], NewRoute, Route).
 
 delta(A,B,C) :- 
     C is B-A.
 
 toMin(H:M, Minutes) :- 
     Minutes is H * 60 + M. 
-
-find(Day, Daylist) :-
-    Daylist=alldays;
-    Day=alldays;
-    member(Day, Daylist).
-
-inBoth(Day, List1, List2) :-
-    member(Day, List1),
-    member(Day, List2).
 
 /********************/
 /***** DATABASE *****/
@@ -119,12 +113,12 @@ timetable(ljubljana,london,
 11:25/12:20/yu212/[su]]).
 
 timetable(milan,london,
-[ 9:10/10:00/az458/alldays,
-12:20/13:10/ba511/alldays]).
+[ 9:10/10:00/az458/[mo,tu,we,th,fr,sa,su],
+12:20/13:10/ba511/[mo,tu,we,th,fr,sa,su]]).
 
 timetable(milan,zurich,
-[ 9:25/10:15/sr621/alldays,
-12:45/13:35/sr623/alldays]).
+[ 9:25/10:15/sr621/[mo,tu,we,th,fr,sa,su],
+12:45/13:35/sr623/[mo,tu,we,th,fr,sa,su]]).
 
 timetable(zurich,ljubljana,
 [13:30/14:40/yu323/[tu,th]]).
@@ -134,4 +128,4 @@ timetable(zurich,london,
 16:10/16:55/sr806/[mo,tu,we,th,fr,su]]).
 
 timetable(zurich,milan,
-[ 7:55/8:45/sr620/alldays]).
+[ 7:55/8:45/sr620/[mo,tu,we,th,fr,sa,su]]).
