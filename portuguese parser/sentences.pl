@@ -16,12 +16,12 @@ vp(frase_verbal(complemento(C,NP), verbo(V)), Num) --> comp(C, Num2, Gender), np
 
 det(X, A, B, C, D, E) :- det(A, B, C, D, E), head(D, X).
 
-det(min, sing, fem) --> [a];[uma].
-det(min, plur, fem) --> [as];[umas].
+det(min, sing, fem)  --> [a];[uma].
+det(min, plur, fem)  --> [as];[umas].
 det(min, sing, masc) --> [o];[um].
 det(min, plur, masc) --> [os];[uns].
-det(max, sing, fem) --> ['A'];['Uma'].
-det(max, plur, fem) --> ['As'];['Umas'].
+det(max, sing, fem)  --> ['A'];['Uma'].
+det(max, plur, fem)  --> ['As'];['Umas'].
 det(max, sing, masc) --> ['O'];['Um'].
 det(max, plur, masc) --> ['Os'];['Uns'].
 
@@ -29,13 +29,14 @@ det(max, plur, masc) --> ['Os'];['Uns'].
 
 comp(X, A, B, C, D) :- comp(A, B, C, D), head(C, X).
 
-comp(_,_) --> [com];[para].
+comp(_,_)        --> [com];[para].
 comp(sing, masc) --> [pelo];[ao];[no].
-comp(sing, fem) --> [pela];[a];[na].
+comp(sing, fem)  --> [pela];[a];[na].
 comp(plur, masc) --> [pelos];[aos];[nos].
-comp(plur, fem) --> [pelas];[as];[nas].
+comp(plur, fem)  --> [pelas];[as];[nas].
 
 % Verbos -------------------------------------------------------------------
+
 v(X, A, B, C) :- v(A, B, C), head(B,X).
 
 v(sing) --> [bateu];[corre];[correu].
