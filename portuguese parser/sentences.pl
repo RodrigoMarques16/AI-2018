@@ -51,11 +51,11 @@ n(min, sing, fem) -->
 
 n(max, sing, fem)  --> 
     ['Menina'];['Vida'];['Floresta'];['Mae'];
- 	['Cidade'];['Noticia'];['Porta'];['Lagrima'].
+    ['Cidade'];['Noticia'];['Porta'];['Lagrima'].
 
 n(min, plur, fem) -->
     [meninas];[vidas];[florestas];[maes];
- 	[cidades];[noticias];[portas];[lagrimas].
+    [cidades];[noticias];[portas];[lagrimas].
 
 n(max, plur, fem)  -->
     ['Meninas'];['Vidas'];['Florestas'];['Maes'];
