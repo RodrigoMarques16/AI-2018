@@ -15,6 +15,7 @@ question2(Place1, Place2, Day, List) :-
 depTime(_-_:_:DepartureTime, DepartureTime).
 
 % Is true if there are at least 40 minutes between Time1 and Time2
+transfer(-1, _).
 transfer(Time1, Time2) :-
     toMin(Time1,M1),
     toMin(Time2,M2),
@@ -27,16 +28,31 @@ flight(Place1,Place2,Day,Flight_num,Dep_time,Arr_time) :-
     member(Dep_time/Arr_time/Flight_num/DayList, List),
     member(Day, DayList).
 
-% Gets all flights originating from Place1
-allFlights(Place1, Day, L) :- 
-    findall(Place1-Place2:Day:Flight_num:Dep_time, flight(Place1, Place2, Day, Flight_num, Dep_time, _:_), L).
+% Call the recursive route function with an initialized list
+route(Place1, Place2, Day, Route) :-  
+    route_r(Place1, Place2, Day, -1, Route).
 
-route(Place1, Place2, Day, Route) :-  route_r(Place1, Place2, Day, Route, [Place1]).
+% Direct flight
+route_r(Place1, Place2, Day, Arrival, [Place1-Place2:Flight_num:Dep_time]) :- 
+    flight(Place1, Place2, Day, Flight_num, Dep_time, _Arr_time),
+    transfer(Arrival, Dep_time).
 
-route_r(Place1, Place2, Day, [Place1-Place2:Flight_num:DEPTIME], _) :- 
-    flight(Place1, Place2, Day, Flight_num, DEPTIME, _).
+% Intermediary flight
+route_r(Place1, Place2, Day, Arrival, FullRoute) :-
+    flight(Place1, Intermed, Day, Flight_num, Dep_time, Arr_time),
+    transfer(Arrival, Dep_time),
+    print(Arrival),print("|"), print(Dep_time),print("|"), print(Arr_time), nl,
+    route_r(Intermed, Place2, Day, Arr_time, NewFullRoute),
+    append([Place1-Intermed:Flight_num:Dep_time], NewFullRoute, FullRoute).
 
-
+/*route_r(Place1, Place2, Day, Route, InRoute) :- 
+    flight(Place1, Intermed, Day, Flight_num, Dep_time, _Arr_time),
+    print(depTime(Route)),
+	\+ member(Intermed, InRoute),
+	append(InRoute, Place2, NewPlaces),								  
+	route_r(Intermed, Place2, Day, NewRoute, NewPlaces),
+	append([Place1-Intermed:Flight_num:Dep_time], NewRoute, Route).
+*/
 
 /*
 route(Place1,Place2,Day,Route) :- 
