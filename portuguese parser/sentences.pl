@@ -28,11 +28,18 @@ det(max, plur, masc) --> ['Os'];['Uns'].
 % Complementos -------------------------------------------------------------
 
 comp(X, A, B, C, D) :- comp(A, B, C, D), head(C, X).
+
 comp(_,_) --> [com];[para].
 comp(sing, masc) --> [pelo];[ao];[no].
 comp(sing, fem) --> [pela];[a];[na].
 comp(plur, masc) --> [pelos];[aos];[nos].
 comp(plur, fem) --> [pelas];[as];[nas].
+
+% Verbos -------------------------------------------------------------------
+v(X, A, B, C) :- v(A, B, C), head(B,X).
+
+v(sing) --> [bateu];[corre];[correu].
+v(plur) --> [bateram];[correram];[corriam].
 
 % Nomes --------------------------------------------------------------------
 
@@ -77,8 +84,3 @@ n(max, plur, masc) -->
     ['Pais'];['Rostos'];['Rios'];['Mares'];
     ['Cachorros'];['Tambores'];['Sinos'];['Ventos'];
     ['Martelos'].
-
-% Verbos -------------------------------------------------------------------
-v(X, A, B, C) :- v(A, B, C), head(B,X).
-v(sing) --> [bateu];[corre];[correu].
-v(plur) --> [bateram];[correram];[corriam].
