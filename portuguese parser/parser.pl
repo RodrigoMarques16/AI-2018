@@ -1,7 +1,7 @@
-:- use_rendering(svgtree, [list(false)]).
+%:- use_rendering(svgtree, [list(false)]).
 
-head([H|_], H). 
- 
+head([H|_], H).
+
 sentence(frase(NP)) --> np(NP, max, _, _).
 sentence(frase(NP, VP)) --> np(NP, max, Num, _), vp(VP, Num).
 
@@ -11,6 +11,8 @@ np(sujeito(det(Det), nome(N)), Cap, Num, Gender) --> det(Det, Cap, Num, Gender),
 vp(verbo(V), Num) --> v(V, Num).
 vp(frase_verbal(verbo(V), complemento(C,NP)), Num) --> v(V, Num), comp(C, Num2, Gender), np(NP, min, Num2, Gender).
 vp(frase_verbal(complemento(C,NP), verbo(V)), Num) --> comp(C, Num2, Gender), np(NP, min, Num2, Gender), v(V, Num).
+
+
 
 % Determinantes ------------------------------------------------------------
 
@@ -46,11 +48,11 @@ v(plur) --> [bateram];[correram];[corriam].
 
 n(X, A, B, C, D, E) :- n(A, B, C, D, E), head(D, X).
 
-n(min, sing, fem) --> 
+n(min, sing, fem) -->
     [menina];[vida];[floresta];[mae];
     [cidade];[noticia];[porta];[lagrima].
 
-n(max, sing, fem)  --> 
+n(max, sing, fem)  -->
     ['Menina'];['Vida'];['Floresta'];['Mae'];
     ['Cidade'];['Noticia'];['Porta'];['Lagrima'].
 
@@ -61,26 +63,26 @@ n(min, plur, fem) -->
 n(max, plur, fem)  -->
     ['Meninas'];['Vidas'];['Florestas'];['Maes'];
     ['Cidades'];['Noticias'];['Portas'];['Lagrimas'].
-    
-n(min, sing, masc) --> 
+
+n(min, sing, masc) -->
     [menino];[tempo];[cacador];[lobo];
     [pai];[rosto];[rio];[mar];
     [cachorro];[tambor];[sino];[vento];
     [martelo].
 
-n(max, sing, masc) --> 
+n(max, sing, masc) -->
     ['Menino'];['Tempo'];['Cacador'];['Lobo'];
     ['Pai'];['Rosto'];['Rio'];['Mar'];
     ['Cachorro'];['Tambor'];['Sino'];['Vento'];
     ['Martelo'].
 
-n(min, plur, masc) --> 
+n(min, plur, masc) -->
     [meninos];[tempos];[cacadores];[lobos];
     [pais];[rostos];[rios];[mares];
     [cachorros];[tambores];[sinos];[ventos];
     [martelos].
 
-n(max, plur, masc) --> 
+n(max, plur, masc) -->
     ['Meninos'];['Tempos'];['Cacadores'];['Lobos'];
     ['Pais'];['Rostos'];['Rios'];['Mares'];
     ['Cachorros'];['Tambores'];['Sinos'];['Ventos'];
