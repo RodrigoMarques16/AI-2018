@@ -1,4 +1,4 @@
-:- op(50, xfy, :).
+	:- op(50, xfy, :).
 :- op(60, xfy, /).
 
 % In which days of the week there is a direct flight from Place1 to Place2?
@@ -10,13 +10,14 @@ question2(Place1, Place2, Day, List) :-
     findall(Flight_num:Dep_time, flight(Place1, Place2, Day, Flight_num, Dep_time, _:_), List).
 
 % What order should C1, C2 and C3 be visited, starting and ending at S, with at most 1 flight a day?
-question3(S, C1, C2, C3, Day1, List) :-
+question3(S, C1, C2, C3, Day1, Day2, List) :-
     member(X, [C1,C2,C3]), X \= S,
     member(Y, [C1,C2,C3]), Y \= S, Y \== X,
     member(Z, [C1,C2,C3]), Z \= S, Z \= X, Z \= Y,
-    question3_(S, X, Y, Z, Day1, List), !.
+    question3_(S, X, Y, Z, Day1, LastDay, List), 
+    Day2 = LastDay, !.
 
-question3_(S, C1, C2, C3, Day1, List) :-
+question3_(S, C1, C2, C3, Day1, LastDay, List) :-
 	route(S, C1, Day1, Route1),
     length(Route1, 1),
     nextDay(Day1, Day2),
@@ -25,8 +26,8 @@ question3_(S, C1, C2, C3, Day1, List) :-
     nextDay(Day2, Day3),
     route(C2, C3, Day3, Route3),
     length(Route3, 1),
-    nextDay(Day3, Day4),
-    route(C3, S, Day4, Route4),
+    nextDay(Day3, LastDay),
+    route(C3, S, LastDay, Route4),
     length(Route4, 1),
     Temp = [Route1, Route2, Route3, Route4],
     append(Temp, List).
@@ -34,13 +35,13 @@ question3_(S, C1, C2, C3, Day1, List) :-
 % Retrieves the DepartureTime from a Route
 depTime(_-_:_:DepartureTime, DepartureTime).
 
-% Avances day
+% Advances day
 nextDay(mo, Day) :- Day=tu; Day=we; Day=th; Day=fr; Day=sa; Day=su.
-nextDay(tu, Day) :- Day=mo; Day=we; Day=th; Day=fr; Day=sa; Day=su.
-nextDay(we, Day) :- Day=mo; Day=tu; Day=th; Day=fr; Day=sa; Day=su.
-nextDay(th, Day) :- Day=mo; Day=tu; Day=we; Day=fr; Day=sa; Day=su.
-nextDay(fr, Day) :- Day=mo; Day=tu; Day=we; Day=th; Day=sa; Day=su.
-nextDay(sa, Day) :- Day=mo; Day=tu; Day=we; Day=th; Day=fr; Day=su.
+nextDay(tu, Day) :- Day=we; Day=th; Day=fr; Day=sa; Day=su; Day=mo.
+nextDay(we, Day) :- Day=th; Day=fr; Day=sa; Day=su; Day=mo; Day=tu.
+nextDay(th, Day) :- Day=fr; Day=sa; Day=su; Day=mo; Day=tu; Day=we.
+nextDay(fr, Day) :- Day=sa; Day=su; Day=mo; Day=tu; Day=we; Day=th.
+nextDay(sa, Day) :- Day=su; Day=mo; Day=tu; Day=we; Day=th; Day=fr.
 nextDay(su, Day) :- Day=mo; Day=tu; Day=we; Day=th; Day=fr; Day=sa.
 
 % Is true if there are at least 40 minutes between Time1 and Time2
