@@ -22,9 +22,9 @@ Tiago Melo 201604918
  
   The required queries were implemented as:
   
-     - question1(Place1, Place2, List)
-     - question2(Place1, Place2, Day, List)
-     - question3(S, C1, C2, C3, Day1, List) 
+    - question1(Place1, Place2, List)
+    - question2(Place1, Place2, Day, List)
+    - question3(S, C1, C2, C3, Day1, List) 
      
   Each named as in the assignment description
 
@@ -43,7 +43,7 @@ Tiago Melo 201604918
   
   With Tree being the syntatic tree returned by the query.
 
-  Due to Prolog's nature, words starting with a capital letter must be enclosed in ''.
+  Due to Prolog's nature, words starting with a capital letter must be enclosed in ''
 
   #### Python ####################################
 
