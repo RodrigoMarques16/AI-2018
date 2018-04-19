@@ -14,11 +14,11 @@ Tiago Melo 201604918
 ## Running ######################################################################################
 
 
- ## Flight planner #############################
+ ### Flight planner #############################
  
  Call with `flights.pl` or `flights.py`
   
-  ## Prolog #################################### 
+  #### Prolog #################################### 
  
   The required queries were implemented as:
      - question1(Place1, Place2, List)
@@ -26,15 +26,15 @@ Tiago Melo 201604918
      - question3(S, C1, C2, C3, Day1, List) 
   Each named as in the assignment description
 
-  ## Python ####################################
+  #### Python ####################################
   
   The same queries are implemented.
 
- ## Portuguese Grammatical Parser ##############
+ ### Portuguese Grammatical Parser ##############
 
  Run with `parser.pl` or `parser.py`
 
-  ## Prolog ####################################
+  #### Prolog ####################################
   
   To parse through a sentence use the query sentence/3, for example
      - sentence(Tree, ['A', menina, bateu, a, porta], [])
@@ -43,6 +43,6 @@ Tiago Melo 201604918
 
   Due to Prolog's nature, words starting with a capital letter must be enclosed in ''.
 
-  ## Python ####################################
+  #### Python ####################################
 
   Enter your phrase normally, but with ',' seperating each word.
