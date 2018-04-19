@@ -1,6 +1,6 @@
 from pyswip import *
 
-prolog = Prolog()
+prolog = Prolog()    #initialize
 prolog.consult("flights.pl")
 
 def question1():
