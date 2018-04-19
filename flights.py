@@ -27,14 +27,15 @@ def question2():
     result.closeQuery()
 
 def question3():
-    s  = raw_input("Starting location: ")
-    c1 = raw_input("Choose a city to visit: ")
-    c2 = raw_input("Choose a city to visit: ")
-    c3 = raw_input("Choose a city to visit: ")
-    Day  = Variable()
+    s    = raw_input("Starting location: ")
+    c1   = raw_input("Choose a city to visit: ")
+    c2   = raw_input("Choose a city to visit: ")
+    c3   = raw_input("Choose a city to visit: ")
+    day1  = raw_input("When does your trip start: ")
+    day2  = raw_input("When does your trip end: ")
     List = Variable()
-    q    = Functor("question3", 6)
-    result = Query(q(s,c1,c2,c3,Day,List))
+    q    = Functor("question3", 7)
+    result = Query(q(s,c1,c2,c3,day1,day2,List))
     while result.nextSolution():
         for x in List.value:
             print x
