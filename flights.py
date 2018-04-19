@@ -41,9 +41,9 @@ def question3():
     result.closeQuery()
 
 questions = {
-    "q1": question1,
-    "q2": question2,
-    "q3": question3
+    "question1": question1,
+    "question2": question2,
+    "question3": question3
 }
 
 def main():
