@@ -21,9 +21,11 @@ Tiago Melo 201604918
   #### Prolog #################################### 
  
   The required queries were implemented as:
+  
      - question1(Place1, Place2, List)
      - question2(Place1, Place2, Day, List)
      - question3(S, C1, C2, C3, Day1, List) 
+     
   Each named as in the assignment description
 
   #### Python ####################################
