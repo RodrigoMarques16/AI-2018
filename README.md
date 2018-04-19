@@ -21,14 +21,14 @@ Tiago Melo 201604918
   ## Prolog #################################### 
  
   The required queries were implemented as:
-     | question1(Place1, Place2, List)
-     | question2(Place1, Place2, Day, List)
-     | question3(S, C1, C2, C3, Day1, List)
+     - question1(Place1, Place2, List)
+     - question2(Place1, Place2, Day, List)
+     - question3(S, C1, C2, C3, Day1, List) 
   Each named as in the assignment description
 
   ## Python ####################################
   
-  The same queries are implemented
+  The same queries are implemented.
 
  ## Portuguese Grammatical Parser ##############
 
@@ -37,10 +37,12 @@ Tiago Melo 201604918
   ## Prolog ####################################
   
   To parse through a sentence use the query sentence/3, for example
-     | sentence(Tree, ['A', menina, bateu, a, porta], [])
+     - sentence(Tree, ['A', menina, bateu, a, porta], [])
+  
   With Tree being the syntatic tree returned by the query.
-  Due to Prolog's nature, words starting with a capital letter must be enclosed in ''
+
+  Due to Prolog's nature, words starting with a capital letter must be enclosed in ''.
 
   ## Python ####################################
 
-  Enter the phrase as a string with ',' seperating each word
+  Enter your phrase normally, but with ',' seperating each word.
