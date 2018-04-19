@@ -1,4 +1,4 @@
-	:- op(50, xfy, :).
+:- op(50, xfy, :).
 :- op(60, xfy, /).
 
 % In which days of the week there is a direct flight from Place1 to Place2?
@@ -18,7 +18,7 @@ question3(S, C1, C2, C3, Day1, Day2, List) :-
     Day2 = LastDay, !.
 
 question3_(S, C1, C2, C3, Day1, LastDay, List) :-
-	route(S, C1, Day1, Route1),
+    route(S, C1, Day1, Route1),
     length(Route1, 1),
     nextDay(Day1, Day2),
     route(C1, C2, Day2, Route2),
@@ -54,7 +54,7 @@ transfer(Time1, Time2) :-
 
 % Says if a flight from Place1 to Place2 exists in a certain Day
 flight(Place1,Place2,Day,Flight_num,Dep_time,Arr_time) :-
-	timetable(Place1,Place2, List),
+	  timetable(Place1,Place2, List),
     member(Dep_time/Arr_time/Flight_num/DayList, List),
     member(Day, DayList).
 
