@@ -54,7 +54,7 @@ transfer(Time1, Time2) :-
 
 % Says if a flight from Place1 to Place2 exists in a certain Day
 flight(Place1,Place2,Day,Flight_num,Dep_time,Arr_time) :-
-	  timetable(Place1,Place2, List),
+    timetable(Place1,Place2, List),
     member(Dep_time/Arr_time/Flight_num/DayList, List),
     member(Day, DayList).
 
