@@ -16,9 +16,7 @@ Tiago Melo 201604918
 
  ## Flight planner #############################
  
- Call with
- `flights.pl`
- `flights.py`
+ Call with `flights.pl` or `flights.py`
   
   ## Prolog #################################### 
  
@@ -33,6 +31,8 @@ Tiago Melo 201604918
   The same queries are implemented
 
  ## Portuguese Grammatical Parser ##############
+
+ Run with `parser.pl` or `parser.py`
 
   ## Prolog ####################################
   
