@@ -1,7 +1,5 @@
 %:- use_rendering(svgtree, [list(false)]).
 
-v(verbo(bateu)) --> [bateu].
-
 head([H|_], H).
 
 sentence(frase(NP)) --> np(NP, max, _, _).
