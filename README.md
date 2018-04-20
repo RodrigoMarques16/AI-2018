@@ -9,7 +9,7 @@ Tiago Melo 201604918
 
  - SWI-Prolog 7.6.x
  - Python 2.7.x
- - PySWIP 0.2.3 and its requirements (https://github.com/yuce/pyswip)
+ - PySWIP 0.2.3 and its requirements (https://github.com/yuce/pyswip) (included, might need to recompile)
 
 ## Running ######################################################################################
 
