@@ -1,6 +1,6 @@
 from pyswip import *
 
-prolog = Prolog()    #initialize
+prolog = Prolog()
 prolog.consult("flights.pl")
 
 def question1():
@@ -49,9 +49,9 @@ questions = {
 
 def main():
     print("Flight planner - Answers specific questions")
-    print("q1: In which days of the week there is a direct flight from Place1 to Place2?")
-    print("q2: What are the available flights from Place1 to Place2 on a certain Day?")
-    print("q3: What order should C1, C2 and C3 be visited, starting and ending at S, with at most 1 flight a day?")
+    print("question1: In which days of the week there is a direct flight from Place1 to Place2?")
+    print("question2: What are the available flights from Place1 to Place2 on a certain Day?")
+    print("question3: What order should C1, C2 and C3 be visited, starting and ending at S, with at most 1 flight a day?")
     print("Enter 'exit' to exit the program")
     while True:
         question = raw_input("Which question? ")

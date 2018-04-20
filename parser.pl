@@ -9,12 +9,9 @@ np(sujeito(N), Cap, Num, Gender) --> n(N, Cap, Num, Gender).
 np(sujeito(det(Det), nome(N)), Cap, Num, Gender) --> det(Det, Cap, Num, Gender), n(N, min, Num, Gender).
 
 vp(verbo(V), Num) --> v(V, Num).
-vp(predicado(verbo(V), complemento(C)), Num) --> v(V, Num), comp(C, _, _).
-vp(predicado(complemento(C), verbo(V)), Num) --> comp(C, _, _), v(V, Num).
+vp(frase_verbal(verbo(V), complemento(C,NP)), Num) --> v(V, Num), comp(C, Num2, Gender), np(NP, min, Num2, Gender).
+vp(frase_verbal(complemento(C,NP), verbo(V)), Num) --> comp(C, Num2, Gender), np(NP, min, Num2, Gender), v(V, Num).
 
-comp(complemento(prep(P), nome(N)), Num, Gender) --> prep(P, Num, Gender), n(N, min, Num, Gender).
-comp(complemento(prep(P), det(Det), nome(N)), Num, Gender) 
-	--> prep_s(P), det(Det, min, Num, Gender), n(N, min, Num, Gender).
 
 
 % Determinantes ------------------------------------------------------------
@@ -30,17 +27,15 @@ det(max, plur, fem)  --> ['As'];['Umas'].
 det(max, sing, masc) --> ['O'];['Um'].
 det(max, plur, masc) --> ['Os'];['Uns'].
 
-% Preposições --------------------------------------------------------------
+% Complementos -------------------------------------------------------------
 
-prep_s(X, A, B) :- prep_s(A, B), head(A, X).
-prep_s --> [com];[para].
+comp(X, A, B, C, D) :- comp(A, B, C, D), head(C, X).
 
-prep(X, A, B, C, D) :- prep(A, B, C, D), head(C, X).
-
-prep(sing, masc) --> [pelo];[ao];[no].
-prep(sing, fem)  --> [pela];[a];[na].
-prep(plur, masc) --> [pelos];[aos];[nos].
-prep(plur, fem)  --> [pelas];[as];[nas].
+comp(_,_)        --> [com];[para].
+comp(sing, masc) --> [pelo];[ao];[no].
+comp(sing, fem)  --> [pela];[a];[na].
+comp(plur, masc) --> [pelos];[aos];[nos].
+comp(plur, fem)  --> [pelas];[as];[nas].
 
 % Verbos -------------------------------------------------------------------
 

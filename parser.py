@@ -17,6 +17,7 @@ def main():
             break
         else:
             phrase = "sentence(Tree, [" + phrase + "], [])"
+            print(phrase)
             for soln in prolog.query(phrase):
                 print(soln)
     print("Exiting parser")
