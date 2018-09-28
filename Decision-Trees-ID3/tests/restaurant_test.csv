@@ -1,0 +1,6 @@
+ID,Alt,Bar,Fri,Hun,Pat,Price,Rain,Res,Type,Est
+X1,Yes,Yes,Yes,No,Some,$$$,Yes,Yes,Burger,0-10
+X2,Yes,No,Yes,No,None,$,No,Yes,French,10-30
+X3,No,Yes,Yes,Yes,Full,$$,No,No,Thai,30-60
+X4,No,No,No,No,Some,$,No,Yes,Italian,0-10
+X5,Yes,No,Yes,No,Full,$$,No,Yes,Italian,>60
